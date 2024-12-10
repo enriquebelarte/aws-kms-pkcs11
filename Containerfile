@@ -4,6 +4,7 @@ MAINTAINER Enrique Belarte Luque <ebelarte@redhat.com>
 ARG AWS_SDK_CPP_VERSION=1.11.463
 # Install packages
 RUN INSTALL_PKGS="clang unzip cmake zlib-devel openssl-devel libcurl-devel git p11-kit-devel json-c-devel" \
+    && dnf config-manager --set-enabled crb \
     && dnf install -y --setopt=tsflags=nodocs $INSTALL_PKGS \
     && dnf clean all \
     && rm -rf /var/cache/yum
