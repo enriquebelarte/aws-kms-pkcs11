@@ -1,0 +1,10 @@
+{
+  "slots": [
+    {
+      "label": "kms-sign-key",
+      "kms_key_id": "MY_KMS_ID",
+      "aws_region": "eu-west-3",
+      "certificate_path": "/etc/aws-kms-pkcs11/mycert.pem"
+    }
+  ]
+}
