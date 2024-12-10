@@ -1,4 +1,5 @@
-FROM registry.access.redhat.com/ubi9/ubi AS sdk-builder
+ARG BASE_IMAGE
+FROM ${BASE_IMAGE} AS sdk-builder
 MAINTAINER Enrique Belarte Luque <ebelarte@redhat.com>
 ARG AWS_SDK_CPP_VERSION=1.11.463
 # Install packages
@@ -20,7 +21,7 @@ RUN git clone https://github.com/JackOfMostTrades/aws-kms-pkcs11.git && \
     cd aws-kms-pkcs11 && \
     AWS_SDK_PATH=~/aws-sdk-cpp make
 
-FROM registry.access.redhat.com/ubi9/ubi
+FROM ${BASE_IMAGE}
 ARG AWS_ACCESS_KEY_ID
 ARG AWS_SECRET_ACCESS_KEY
 ARG AWS_DEFAULT_REGION
