@@ -40,7 +40,11 @@ RUN INSTALL_PKGS="openssl openssl-pkcs11 yq kernel-devel unzip less" \
 # Install AWS CLI
 RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
     unzip awscliv2.zip && \
-    ./aws/install
+    ./aws/install && \
+    rm awscliv2.zip
+# Install yq
+RUN curl -L https://github.com/mikefarah/yq/releases/download/v${YQ_VERSION}/yq_linux_amd64 -o /usr/bin/yq && \
+    chmod +x /usr/bin/yq
 # Copy the library from previous build step
 COPY --from=sdk-builder /aws-kms-pkcs11/aws_kms_pkcs11.so /usr/lib64/pkcs11/
 # Copy configuration files for aws-kms-pkcs11 library
