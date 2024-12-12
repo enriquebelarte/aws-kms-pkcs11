@@ -33,7 +33,7 @@ ENV AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
 ENV AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION
 ENV AWS_KMS_TOKEN=$AWS_KMS_TOKEN
 # Install packages
-RUN INSTALL_PKGS="openssl openssl-pkcs11 yq kernel-devel unzip less" \
+RUN INSTALL_PKGS="openssl openssl-pkcs11 kernel-devel unzip less" \
     && dnf install -y --setopt=tsflags=nodocs $INSTALL_PKGS \
     && dnf -y clean all \
     && rm -rf /var/cache/yum
