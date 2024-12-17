@@ -3,6 +3,9 @@ Container for PKCS11 implementation using AWS KMS backend.
 
 AWS auth to your account and the following variables should be set before the running `enable_kms_pkcs11`
 
+
 AWS_KMS_TOKEN - The key ID from KMS
+
 AWS_DEFAULT_REGION - The AWS region where the key is hosted
+
 AWS_KMS_KEY_LABEL - The alias/label you want to set for the key
