@@ -23,16 +23,7 @@ RUN git clone https://github.com/JackOfMostTrades/aws-kms-pkcs11.git && \
     AWS_SDK_PATH=~/aws-sdk-cpp make
 
 FROM ${BASE_IMAGE}
-ARG AWS_ACCESS_KEY_ID
-ARG AWS_SECRET_ACCESS_KEY
-ARG AWS_DEFAULT_REGION
-ARG AWS_KMS_TOKEN
 ARG YQ_VERSION=4.34.1
-# Set enviroment variables for AWS auth
-ENV AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
-ENV AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
-ENV AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION
-ENV AWS_KMS_TOKEN=$AWS_KMS_TOKEN
 # Install packages
 RUN INSTALL_PKGS="openssl openssl-pkcs11 kernel-devel unzip less" \
     && dnf install -y --setopt=tsflags=nodocs $INSTALL_PKGS \
@@ -51,5 +42,5 @@ COPY --from=sdk-builder /aws-kms-pkcs11/aws_kms_pkcs11.so /usr/lib64/pkcs11/
 # Copy configuration files for aws-kms-pkcs11 library
 COPY openssl/config.json openssl/x509.genkey openssl/openssl-pkcs11.conf /etc/aws-kms-pkcs11/
 # Copy shell script to update config
-COPY --chmod=0755 scripts/configure_pkcs.sh /bin/configure_pkcs.sh
+COPY --chmod=0755 scripts/enable_kms_pkcs11 /bin/enable_kms_pkcs11
 
